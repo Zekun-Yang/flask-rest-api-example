@@ -1,10 +1,12 @@
 import os
+import logging
 from flask import Flask
 from flask import jsonify
 from api.utils.database import db
 from api.config.config import ProductionConfig, TestingConfig, DevelopmentConfig
 from api.utils.responses import response_with
 import api.utils.responses as resp
+from api.routes.authors import author_routes
 
 
 app = Flask(__name__)
@@ -19,7 +21,7 @@ else:
 
 app.config.from_object(app_config)
 
-
+app.register_blueprint(author_routes, url_prefix='/api/authors')
 
 @app.after_request
 def add_header(response):

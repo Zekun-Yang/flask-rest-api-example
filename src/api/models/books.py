@@ -8,7 +8,7 @@ class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(50))
     year = db.Column(db.Integer)
-    author_id = db.Column(db.Integer, db.ForeignerKey('authors.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
 
     def __init__(self, title, year, author_id=None):
         self.title = title
