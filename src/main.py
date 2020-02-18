@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask import jsonify
 from api.utils.database import db
+from api.config.config import ProductionConfig, TestingConfig, DevelopmentConfig
 
 app = Flask(__name__)
 
@@ -11,8 +12,6 @@ elif os.environ.get('WORK_ENV') == 'TEST':
     app_config = TestingConfig
 else:
     app_config = DevelopmentConfig
-
-app.config.from_object(app_config)
 
 def create_app(config):
     app = Flask(__name__)
