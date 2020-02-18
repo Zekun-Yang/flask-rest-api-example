@@ -21,7 +21,7 @@ class Book(db.Model):
         return self
 
 class BookSchema(ModelSchema):
-    class Meta:
+    class Meta(ModelSchema.Meta):
         model = Book
         sqla_session = db.session
     
@@ -29,4 +29,4 @@ class BookSchema(ModelSchema):
     title = fields.String(required=True)
     yeat = fields.Number(required=True)
     author_id = fields.Integer()
-    
+
