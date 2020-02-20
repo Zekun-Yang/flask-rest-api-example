@@ -10,6 +10,9 @@ from api.routes.authors import author_routes
 from api.routes.book import book_routes
 from api.routes.users import user_routes
 from flask_jwt_extended import JWTManager
+from flask_swagger import swagger
+from flask_swagger_ui import get_swaggerui_blueprint
+
 
 
 
@@ -48,6 +51,20 @@ def server_error(e):
 def not_found(e):
     logging.error(e)
     return response_with(resp. SERVER_ERROR_404)
+
+@app.route("/api/spec")
+def spec():
+    swag = swagger(app, prefix='/api')
+    swag['info']['base'] = "http://localhost:5000"
+    swag['info']['version'] = "1.0"
+    swag['info']['title'] = "Flask Author DB"
+    return jsonify(swag)
+
+swaggerui_blueprint = get_swaggerui_blueprint('/api/docs', '/api/spec', config={'app_name':'Flask Author DB'})
+
+app.register_blueprint(swaggerui_blueprint, url_prefix='/api/docs')
+
+
 jwt = JWTManager(app)
 db.init_app(app)
 with app.app_context():
