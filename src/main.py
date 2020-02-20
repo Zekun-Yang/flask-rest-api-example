@@ -8,6 +8,9 @@ from api.utils.responses import response_with
 import api.utils.responses as resp
 from api.routes.authors import author_routes
 from api.routes.book import book_routes
+from api.routes.users import user_routes
+import flask_jwt_extended import JWTManager
+
 
 
 app = Flask(__name__)
@@ -24,6 +27,8 @@ app.config.from_object(app_config)
 
 app.register_blueprint(author_routes, url_prefix='/api/authors')
 app.register_blueprint(book_routes, url_prefix='/api/books')
+app.register_blueprint(user_routes, url_prefix='/api/users')
+
 
 @app.after_request
 def add_header(response):
@@ -43,7 +48,7 @@ def server_error(e):
 def not_found(e):
     logging.error(e)
     return response_with(resp. SERVER_ERROR_404)
-
+jwt = JWTManager(app)
 db.init_app(app)
 with app.app_context():
     db.create_all()
