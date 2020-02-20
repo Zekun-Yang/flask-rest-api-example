@@ -7,6 +7,7 @@ from api.config.config import ProductionConfig, TestingConfig, DevelopmentConfig
 from api.utils.responses import response_with
 import api.utils.responses as resp
 from api.routes.authors import author_routes
+from api.routes.book import book_routes
 
 
 app = Flask(__name__)
@@ -22,6 +23,7 @@ else:
 app.config.from_object(app_config)
 
 app.register_blueprint(author_routes, url_prefix='/api/authors')
+app.register_blueprint(book_routes, url_prefix='/api/books')
 
 @app.after_request
 def add_header(response):

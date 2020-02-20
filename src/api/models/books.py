@@ -27,6 +27,6 @@ class BookSchema(ModelSchema):
     
     id = fields.Number(dump_only=True)
     title = fields.String(required=True)
-    yeat = fields.Number(required=True)
+    year = fields.Number(required=True)
     author_id = fields.Integer()
 
