@@ -9,7 +9,7 @@ import api.utils.responses as resp
 from api.routes.authors import author_routes
 from api.routes.book import book_routes
 from api.routes.users import user_routes
-import flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager
 
 
 

@@ -17,7 +17,7 @@ class User(db.Model):
         return self
 
     @classmethod
-    def find_by_username(cls, username):
+    def find_by_username(cla, username):
         return cla.query.filter_by(username = username).first()
 
     @staticmethod

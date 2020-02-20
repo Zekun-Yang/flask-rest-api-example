@@ -5,6 +5,7 @@ from api.utils import responses as resp
 from api.models.authors import Author, AuthorSchema
 from api.utils.database import db
 from marshmallow import ValidationError
+from flask_jwt_extended import jwt_required
 
 author_routes = Blueprint("author_routes", __name__)
 
@@ -38,6 +39,7 @@ def get_author_detail(author_id):
     return response_with(resp.SUCCESS_200, value={"author":author})
 
 @author_routes.route('/<int:author_id>', methods=['PUT'])
+@jwt_required
 def update_author_detail(author_id):
     data = request.get_json()
     get_author = Author.query.get_or_404(author_id)
@@ -51,6 +53,7 @@ def update_author_detail(author_id):
     return response_with(resp.SUCCESS_200, value={"author":author})
 
 @author_routes.route('/<int:author_id>', methods=['DELETE'])
+@jwt_required
 def delete_author(author_id):
     get_author = Author.query.get_or_404(author_id)
     db.session.delete(get_author)
