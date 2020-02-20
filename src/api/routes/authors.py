@@ -10,6 +10,7 @@ from flask_jwt_extended import jwt_required
 author_routes = Blueprint("author_routes", __name__)
 
 @author_routes.route('/', methods=['POST'])
+@jwt_required
 def create_author():
     try:
         
